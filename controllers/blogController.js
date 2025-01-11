@@ -55,14 +55,15 @@ export const createBlog = async (req, res) => {
 // @access  Public
 export const getAllBlogs = async (req, res) => {
 	try {
-		const token = req.headers.authorization?.split(' ')[1];
+		const authHeader = req.headers.authorization;
+		const token = authHeader.split(' ')[1];
 
 		let loggedInUser = null;
-		if (token) {
+		if (token !== "null") {
 			try {
 				loggedInUser = jwt.verify(token, process.env.JWT_SECRET);
 			} catch (error) {
-				console.error('Token verification failed:', error);
+				console.error('Token verification failed:', error.message);
 			}
 		}
 
