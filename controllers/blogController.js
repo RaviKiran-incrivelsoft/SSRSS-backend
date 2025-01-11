@@ -43,7 +43,7 @@ export const createBlog = async (req, res) => {
 		// Save the blog to the database
 		await newBlog.save();
 
-		res.status(201).json({ message: 'Blog created successfully', blog: newBlog });
+		res.status(201).json({ message: 'Blog created successfully' });
 	} catch (error) {
 		console.error(error);
 		res.status(500).json({ message: 'Error creating blog', error: error.message });
@@ -109,7 +109,6 @@ export const getBlogById = async (req, res) => {
 export const toggleLikeBlog = async (req, res) => {
 	try {
 		const { id } = req.params;
-
 		const userId = req.user.id;
 
 		const blog = await Blog.findById(id);
@@ -129,7 +128,6 @@ export const toggleLikeBlog = async (req, res) => {
 			blog.likes.push(userId);
 		}
 
-		// Save the updated blog
 		await blog.save();
 
 		res.status(200).json({

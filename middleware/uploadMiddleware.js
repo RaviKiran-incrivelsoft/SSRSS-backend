@@ -38,6 +38,9 @@ export const configureFileUpload = (isSingle = false, fieldName = "") => {
 				cb(new Error("Unsupported file type"), false);
 			}
 		},
+		limits: {
+		  fileSize: 5 * 1024 * 1024, // 5 MB limit
+		},
 	});
 
 	// Return appropriate middleware based on upload type (single or multiple)
