@@ -6,7 +6,6 @@ import Admin from '../models/Admin.js';
 export const protect = async (req, res, next) => {
 	let token;
 	
-	// Check if the token exists in the Authorization header
 	if (
 		req.headers.authorization &&
 		req.headers.authorization.startsWith('Bearer')
