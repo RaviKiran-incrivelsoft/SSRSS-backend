@@ -56,10 +56,9 @@ export const createBlog = async (req, res) => {
 export const getAllBlogs = async (req, res) => {
 	try {
 		const authHeader = req.headers.authorization;
-		const token = authHeader.split(' ')[1];
-
 		let loggedInUser = null;
-		if (token !== "null") {
+		if (authHeader) {
+			const token = authHeader.split(' ')[1];
 			try {
 				loggedInUser = jwt.verify(token, process.env.JWT_SECRET);
 			} catch (error) {

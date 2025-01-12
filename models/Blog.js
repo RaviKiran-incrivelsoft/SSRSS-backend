@@ -86,8 +86,6 @@ const blogSchema = new mongoose.Schema(
 	{ timestamps: true }
 );
 
-blogSchema.index({ likes: 1 }, { unique: true }); // Ensure unique likes per user
-
 const Blog = mongoose.model('Blog', blogSchema);
 
 export default Blog;

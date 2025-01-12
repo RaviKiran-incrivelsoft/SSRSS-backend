@@ -6,18 +6,18 @@ import Admin from '../models/Admin.js';
 export const protect = async (req, res, next) => {
 	let token;
 	
+	// Check if the token exists in the Authorization header
 	if (
 		req.headers.authorization &&
 		req.headers.authorization.startsWith('Bearer')
 	) {
 		try {
 			token = req.headers.authorization.split(' ')[1];
-			
 			const decoded = jwt.verify(token, process.env.JWT_SECRET);
-			
+
 			const user = await User.findById(decoded.userId).select('-password');
 			const admin = await Admin.findById(decoded.adminId).select('-password');
-			
+
 			if (admin) {
 				req.admin = admin;
 				req.user = null;
